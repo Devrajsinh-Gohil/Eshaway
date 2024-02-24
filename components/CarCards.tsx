@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { createRef, useCallback, useEffect, useRef, useState } from 'react'
 import { CardBody, CardContainer, CardItem } from './ui/3d-card'
 import Image from "next/image";
 import { cardData } from '@/data/data';
 import anime from 'animejs';
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
 const CarCards = () => {
     const cardRefs = cardData.map(() => useRef(null));
 
@@ -37,7 +38,7 @@ const CarCards = () => {
                 }
             });
         };
-    }, []);
+    }, [cardRefs]);
     
     const [isPopupOpen, setPopupOpen] = useState(false);
     const popupRef = useRef(null);

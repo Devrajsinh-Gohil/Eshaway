@@ -9,10 +9,10 @@ const ContactUs = () => {
                 <div className="absolute inset-0 w-full h-full bg-theme-dark z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
 
                 <Boxes />
-                <div className="text-white p-6 z-10 flex flex-col md:flex-row gap-5">
+                <div className="text-white p-6 z-10 flex flex-col md:flex-row gap-8">
                     <div>
                         <h2 className="text-2xl font-bold mb-2">Racing Team IIT Bombay</h2>
-                        <p className="mb-4 max-w-[20rem]">IIT Bombay Racing is India's premier Formula Student Electric team with a vision to "Revolutionize Electric Mobility in India.</p>
+                        <p className="mb-4 max-w-[20rem]">IIT Bombay Racing is India&apos;s premier Formula Student Electric team with a vision to &quot;Revolutionize Electric Mobility in India.&quot;</p>
                     </div>
 
 
@@ -20,11 +20,18 @@ const ContactUs = () => {
                         <div>
                             <h3 className="text-xl font-bold mb-2">Magazine</h3>
                             <p className="mb-4">Stay update with our latest</p>
+                            <div className='flex flex-row items-center justify-center'>
                             <input
                                 type='email'
-                                className="mb-4 appearance-none border-gray-300 w-[80%] py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                className="appearance-none border-gray-300 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-10"
                                 placeholder="Email"
                             />
+                            <button className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 h-10">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                            </button>
+                            </div>
                         </div>
                     </div>
                     <div>

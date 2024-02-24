@@ -9,18 +9,18 @@ const Timeline = () => {
     const [bubblePositions, setBubblePositions] = useState<number[]>([]);
 
     useEffect(() => {
-        setTimeout(() => {
-            setBubblePositions(refs.map(ref => ref.current ? ref.current.offsetTop : 0)); // 10rem = 10 * 16px
-        }, 100);
+    setTimeout(() => {
+        setBubblePositions(refs.map(ref => ref.current ? ref.current.offsetTop : 0));
+    }, 100);
 
-        anime({
-            targets: '.timeline .el',
-            opacity: [0, 1],
-            translateX: (el: any, i: any) => i % 2 === 0 ? [-600, 0] : [600, 0],
-            delay: anime.stagger(100), // increase delay for each element
-            easing: 'easeOutExpo',
-        });
-    }, []);
+    anime({
+        targets: '.timeline .el',
+        opacity: [0, 1],
+        translateX: (el: any, i: any) => i % 2 === 0 ? [-600, 0] : [600, 0],
+        delay: anime.stagger(100), // increase delay for each element
+        easing: 'easeOutExpo',
+    });
+}, []);
 
     return (
         <section className='mt-10'>
@@ -43,7 +43,7 @@ const Timeline = () => {
                             }} className={`hidden md:flex absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full items-center justify-center text-4xl sm:text-7xl font-bold bg-gradient-to-b from-neutral-200 to-neutral-500`}>
                                 <span className="text-white text-xs">{achievement.year}</span>
                             </div>
-                            <div ref={refs[index] as React.RefObject<HTMLDivElement>} className={`${index % 2 === 1 ? 'ml-0 md:ml-[30rem]' : 'mr-0 md:mr-[30rem]'} el opacity-0`}>
+                            <div ref={refs[index] as React.RefObject<HTMLDivElement>} className={`${index % 2 === 1 ? 'ml-0 md:ml-[30rem]' : 'mr-0 md:mr-[30rem]'} el opacity-0 pb-10`}>
                                 <PinContainer title={achievement.title} href={`#${achievement.title}`} className='w-full md:w-1/2 z-10' index={index}>
                                     <div className="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[20rem] h-[15rem] ">
                                         <h3 className="max-w-xs !pb-2 !m-0 font-bold  text-base text-slate-100">
@@ -56,7 +56,6 @@ const Timeline = () => {
                         </React.Fragment>
                     ))}
                 </div>
-
             </div>
         </section>
     );
