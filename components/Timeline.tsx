@@ -1,26 +1,26 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import anime from 'animejs';
 import { PinContainer } from './ui/3d-pin'; // Import PinContainer from its file
 import Image from "next/image";
 import { achievements } from '../data/data'; // Import achievements from data.ts
 
 const Timeline = () => {
-    const refs: React.RefObject<HTMLElement>[] = achievements.map(() => useRef(null));
+    const refs = useMemo(() => Array(achievements.length).fill(0).map(() => React.createRef<HTMLElement>()), []);
     const [bubblePositions, setBubblePositions] = useState<number[]>([]);
 
     useEffect(() => {
-    setTimeout(() => {
-        setBubblePositions(refs.map(ref => ref.current ? ref.current.offsetTop : 0));
-    }, 100);
+        setTimeout(() => {
+            setBubblePositions(refs.map(ref => ref.current ? ref.current.offsetTop : 0));
+        }, 100);
 
-    anime({
-        targets: '.timeline .el',
-        opacity: [0, 1],
-        translateX: (el: any, i: any) => i % 2 === 0 ? [-600, 0] : [600, 0],
-        delay: anime.stagger(100), // increase delay for each element
-        easing: 'easeOutExpo',
-    });
-}, []);
+        anime({
+            targets: '.timeline .el',
+            opacity: [0, 1],
+            translateX: (el: any, i: any) => i % 2 === 0 ? [-600, 0] : [600, 0],
+            delay: anime.stagger(100), // increase delay for each element
+            easing: 'easeOutExpo',
+        });
+    }, [refs]);
 
     return (
         <section className='mt-10'>

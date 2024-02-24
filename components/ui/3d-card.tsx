@@ -126,10 +126,6 @@ export const CardItem = ({
     const ref = useRef<HTMLDivElement>(null);
     const [isMouseEntered] = useMouseEnter();
 
-    useEffect(() => {
-        handleAnimations();
-    }, [isMouseEntered]);
-
     const handleAnimations = useCallback(() => {
         if (!ref.current) return;
         if (isMouseEntered) {

@@ -6,7 +6,7 @@ import anime from 'animejs';
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
 const CarCards = () => {
-    const cardRefs = cardData.map(() => useRef(null));
+    const refs = React.useMemo(() => Array(cardData.length).fill(0).map(() => React.createRef<HTMLElement>()), []);
 
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
@@ -25,20 +25,20 @@ const CarCards = () => {
             threshold: 0.1
         });
     
-        cardRefs.forEach((ref) => {
+        refs.forEach((ref) => {
             if (ref.current) {
                 observer.observe(ref.current);
             }
         });
     
         return () => {
-            cardRefs.forEach((ref) => {
+            refs.forEach((ref) => {
                 if (ref.current) {
                     observer.unobserve(ref.current);
                 }
             });
         };
-    }, [cardRefs]);
+    }, [refs]);
     
     const [isPopupOpen, setPopupOpen] = useState(false);
     const popupRef = useRef(null);
@@ -63,7 +63,7 @@ const CarCards = () => {
     return (
         <div className='flex flex-col justify-start md:flex-row md:items-center px-10 w-full gap-20 overflow-auto h-[65vh] pb-10 md:pb-0'>
             {cardData.map((card, index) => (
-                <div key={index} ref={cardRefs[index]} className=' opacity-0'>
+                <div key={index} ref={refs[index] as React.RefObject<HTMLDivElement>} className=' opacity-0'>
                     <CardContainer className="inter-var w-[21rem] md:w-[25rem]">
                         <CardBody key={index} className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] md:w-[25rem] h-auto rounded-xl p-7 border  ">
                             <CardItem
@@ -74,7 +74,7 @@ const CarCards = () => {
                             </CardItem>
                             <CardItem
                                 as="p"
-                                translateZ="60"
+                                translateZ="60" 
                                 className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
                             >
                                 {card.description}
